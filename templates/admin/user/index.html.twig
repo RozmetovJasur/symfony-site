@@ -1,0 +1,24 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+
+
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Email</td>
+                <td>Role</td>
+                <td>Role</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
