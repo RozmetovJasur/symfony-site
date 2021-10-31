@@ -1,21 +1,21 @@
 {% extends 'admin/admin_base.html.twig' %}
 
 {% block body %}
-
-
+    <a href="{{ path("admin_user_create") }}">Yangi</a>
     <table>
         <thead>
-            <tr>
-                <td>ID</td>
-                <td>Email</td>
-                <td>Role</td>
-                <td>Role</td>
-            </tr>
+        <tr>
+            <td>ID</td>
+            <td>Email</td>
+            <td>Role</td>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles | json_encode }}</td>
             </tr>
         {% endfor %}
         </tbody>
