@@ -12,8 +12,8 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AdminBaseController
 {
@@ -32,11 +32,8 @@ class UserController extends AdminBaseController
 
     /**
      * @Route("/admin/user/create",name="admin_user_create")
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function create(Request $request, UserPasswordHasherInterface $passwordEncoder)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -44,7 +41,7 @@ class UserController extends AdminBaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $password = $passwordEncoder->hashPassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             $user->setRoles(["ROLE_ADMIN"]);
             $em->persist($user);

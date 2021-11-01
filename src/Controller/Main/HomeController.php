@@ -12,16 +12,17 @@ namespace App\Controller\Main;
 
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeControllerAdmin extends BaseController
+class HomeController extends BaseController
 {
 
     /**
      * @Route("/",name="home")
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
-        return $this->render('main/index.html.twig');
+        return $this->render('main/index.html.twig',[
+            'title' => "Bosh sahifa"
+        ]);
     }
 
 }
