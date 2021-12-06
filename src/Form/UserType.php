@@ -27,7 +27,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('save', SubmitType::class, [
-                'label' => "Saqlash"
+                'label' => "Ro'yxatdan o'tish"
             ]);
     }
 

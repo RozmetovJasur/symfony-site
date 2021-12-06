@@ -13,6 +13,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public function __construct()
+    {
+        $this->create_at = $this->update_at = new \DateTimeImmutable();
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -37,6 +42,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     private $plainPassword;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $create_at;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $update_at;
 
     public function getId(): ?int
     {
@@ -137,4 +152,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->plainPassword = $password;
     }
 
+    public function getCreateAt(): ?\DateTimeImmutable
+    {
+        return $this->create_at;
+    }
+
+    public function setCreateAt(\DateTimeImmutable $create_at): self
+    {
+        $this->create_at = $create_at;
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeImmutable
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(\DateTimeImmutable $update_at): self
+    {
+        $this->update_at = $update_at;
+
+        return $this;
+    }
 }

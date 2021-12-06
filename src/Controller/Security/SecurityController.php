@@ -2,8 +2,12 @@
 
 namespace App\Controller\Security;
 
+use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -24,6 +28,31 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    /**
+     * @Route("/registration",name="app_registration")
+     */
+    public function registration(Request $request, UserPasswordHasherInterface $passwordEncoder)
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $em = $this->getDoctrine()->getManager();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $passwordEncoder->hashPassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+            $user->setRoles(["ROLE_ADMIN"]);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('security/registration.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**

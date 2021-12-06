@@ -1,0 +1,17 @@
+{% extends 'main/base.html.twig' %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Ro'yxatdan o'tish!{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center no-gutter">
+            <div class="col-12 col-lg-4 col-md-4">
+                <div class="shadow-lg form-login">
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
