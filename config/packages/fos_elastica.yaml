@@ -1,0 +1,13 @@
+# app/config/packages/fos_elastica.yaml
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
+fos_elastica:
+    clients:
+        default: { url: '%env(ELASTICSEARCH_URL)%' }
+    indexes:
+        products:
+            properties:
+                title: ~
+                content: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Product
