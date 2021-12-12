@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimeStampableEntity;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
-
+    use TimeStampableEntity;
     public const STATUS_ACTIVE = 0;
     public const STATUS_IN_ACTIVE = 1;
 
@@ -37,19 +38,9 @@ class Category
     private string $image;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="smallint", nullable=true,options={"default":0})
      */
-    private ?int $status;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $create_at;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $update_at;
+    private ?int $status = 0;
 
     public function getId(): ?int
     {
@@ -80,30 +71,6 @@ class Category
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeImmutable
-    {
-        return $this->create_at;
-    }
-
-    public function setCreateAt(\DateTimeImmutable $create_at): self
-    {
-        $this->create_at = $create_at;
-
-        return $this;
-    }
-
-    public function getUpdateAt(): ?\DateTimeImmutable
-    {
-        return $this->update_at;
-    }
-
-    public function setUpdateAt(\DateTimeImmutable $update_at): self
-    {
-        $this->update_at = $update_at;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -126,5 +93,19 @@ class Category
         $this->status = $status;
 
         return $this;
+    }
+
+    public static function getStatusLabel()
+    {
+        return [
+            self::STATUS_ACTIVE => "Aktiv",
+            self::STATUS_IN_ACTIVE => "Aktiv emas"
+        ];
+    }
+
+    public function getStatusText()
+    {
+        $status = self::getStatusLabel();
+        return array_key_exists($this->getStatus(), $status) ? $status[$this->getStatus()] : " - ";
     }
 }

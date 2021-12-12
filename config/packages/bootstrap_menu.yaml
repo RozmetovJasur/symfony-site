@@ -1,0 +1,14 @@
+bootstrap_menu:
+  version: 5 # Optional, defaults to Bootstrap 5
+  menus:
+    main:
+      items:
+        account:
+          label: 'Account'
+          items:
+            change_password:
+              label: 'Change password'
+              route: 'app_change_password'
+            logout:
+              label: 'Logout'
+              route: 'app_logout'

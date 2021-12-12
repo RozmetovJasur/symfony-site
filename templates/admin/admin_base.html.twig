@@ -24,6 +24,9 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ path('admin_home') }}"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+{#            {{ knp_menu_render('Bundle:Builder:mainMenu') }}#}
+            {% set route_name = app.request.attributes.get('_route') %}
+            {{ route_name }}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path('admin_home') }}">Bosh sahifa</a>
@@ -42,7 +45,7 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <a href="{{ path('app_logout') }}" class="btn btn-outline-success logout-confirm">Chiqish</a>
+                <a href="{{ path('app_logout') }}" class="btn btn-outline-success confirm">Chiqish</a>
             </form>
         </div>
     </div>
@@ -51,11 +54,13 @@
 <div class="container-fluid">
 
     <div class="row m-2">
-        {% for message in app.flashes %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{ dump(message) }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        {% for type,values in app.flashes %}
+            {% for message in values %}
+                <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
         {% endfor %}
     </div>
     <div class="row no-gutters justify-content-center">
@@ -74,7 +79,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('assets/framework/bootstrap-5.1.3-dist/js/bootstrap.min.js') }}"></script>
 <script>
-$('.logout-confirm').on('click', function (event) {
+$('.confirm').on('click', function (event) {
     event.preventDefault();
     const url = $(this).attr('href');
     swal({

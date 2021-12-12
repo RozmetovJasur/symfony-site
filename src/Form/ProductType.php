@@ -7,6 +7,7 @@ use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,7 +23,7 @@ class ProductType extends AbstractType
             ->add('category', EntityType::class, [
                 'label' => "Kategoriya",
                 'class' => Category::class,
-                'choice_label' => 'title'
+                'choice_label' => 'title',
             ])
             ->add('image', FileType::class, [
                 'required' => false,
@@ -34,6 +35,15 @@ class ProductType extends AbstractType
                 'constraints' => [
                     new NotBlank()
                 ]
+            ])
+            ->add('price', IntegerType::class, [
+                'label' => "Narx",
+                'constraints' => [
+                    new NotBlank()
+                ],
+            ])
+            ->add('discount', IntegerType::class,[
+                'label' => "Chegirma"
             ])
             ->add('content', TextareaType::class, [
                 'label' => "Tovar haqida to'liq ma'lumot",
@@ -47,13 +57,13 @@ class ProductType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-success'
                 ]
-            ])
-            ->add('delete', SubmitType::class, [
-                'label' => "O'chirish",
-                'attr' => [
-                    'class' => 'btn btn-danger'
-                ]
             ]);
+//            ->add('delete', SubmitType::class, [
+//                'label' => "O'chirish",
+//                'attr' => [
+//                    'class' => 'btn btn-danger'
+//                ]
+//            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

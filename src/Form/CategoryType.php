@@ -24,19 +24,19 @@ class CategoryType extends AbstractType
             ->add('image', FileType::class, [
                 'required' => false
             ])
-            ->add('delete', SubmitType::class, [
-                'label' => "O'chirish",
-                'row_attr' => [
-                    'class' => "col-6 pull-right  text-start"
-                ],
-                'attr' => [
-                    'class' => 'btn btn-danger'
-                ]
-            ])
+//            ->add('delete', SubmitType::class, [
+//                'label' => "O'chirish",
+//                'row_attr' => [
+//                    'class' => "col-6 pull-right  text-start"
+//                ],
+//                'attr' => [
+//                    'class' => 'btn btn-danger'
+//                ]
+//            ])
             ->add('save', SubmitType::class, [
                 'label' => "Saqlash",
                 'row_attr' => [
-                    'class' => "col-6 pull-left text-end",
+                    'class' => "col-6 pull-left text-start",
                 ],
                 'attr' => [
                     'class' => 'btn btn-success'

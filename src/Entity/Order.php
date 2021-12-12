@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimeStampableEntity;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Order
 {
+    use TimeStampableEntity;
+
     public const STATUS_NEW = 0;
     public const STATUS_ACCEPTED = 1;
 
@@ -51,17 +54,7 @@ class Order
     private int $status = 0;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $created_at;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $update_at;
-
-    /**
-     * @ORM\Column(type="datetime_immutable",nullable=true)
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $accepted_at = null;
 
@@ -93,23 +86,6 @@ class Order
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function setCreatedAtValue()
-    {
-        $this->created_at = new \DateTime();
-    }
-
     public function setStatusNew()
     {
         $this->status = self::STATUS_NEW;
@@ -139,31 +115,16 @@ class Order
     /**
      * @return \DateTime
      */
-    public function getUpdateAt(): \DateTime
-    {
-        return $this->update_at;
-    }
-
-    /**
-     * @param \DateTime $update_at
-     */
-    public function setUpdateAt(\DateTime $update_at): void
-    {
-        $this->update_at = $update_at;
-    }
-
-    /**
-     * @return \DateTime
-     */
     public function getAcceptedAt(): \DateTime
     {
         return $this->accepted_at;
     }
 
     /**
-     * @param \DateTime $accepted_at
+     * @param \DateTimeInterface $accepted_at
+     * @return void
      */
-    public function setAcceptedAt(\DateTime $accepted_at): void
+    public function setAcceptedAt(\DateTimeInterface $accepted_at): void
     {
         $this->accepted_at = $accepted_at;
     }

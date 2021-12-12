@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimeStampableEntity;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+    use TimeStampableEntity;
     public const PUBLISHED = true;
     public const NOT_PUBLISHED = false;
 
@@ -50,16 +52,6 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $is_publish;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $create_at;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $update_at;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class)
@@ -106,40 +98,6 @@ class Product
         $this->image = $image;
 
         return $this;
-    }
-
-    public function getCreateAt(): ?\DateTimeImmutable
-    {
-        return $this->create_at;
-    }
-
-    public function setCreateAt(\DateTimeImmutable $create_at): self
-    {
-        $this->create_at = $create_at;
-
-        return $this;
-    }
-
-    public function getUpdateAt(): ?\DateTimeImmutable
-    {
-        return $this->update_at;
-    }
-
-    public function setUpdateAt(\DateTimeImmutable $update_at): self
-    {
-        $this->update_at = $update_at;
-
-        return $this;
-    }
-
-    public function setCreateAtValue()
-    {
-        $this->create_at = new \DateTime();
-    }
-
-    public function setUpdateAtValue()
-    {
-        $this->update_at = new \DateTime();
     }
 
     public function getIsPublish(): ?bool

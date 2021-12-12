@@ -16,14 +16,23 @@
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.title }}</td>
-                <td>{{ category.status }}</td>
+                <td>{{ category.statusText }}</td>
                 <td>
-                    <a href="#" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                    <a href="#" class="btn btn-danger"><i class="fa fa-minus"></i></a>
+                    <a href="{{ path('admin_category_update',{'category' :category.id}) }}" class="btn btn-primary">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="{{ path('admin_category_delete',{"category":category.id}) }}"
+                       class="btn btn-danger confirm">
+                        <i class="fa fa-minus"></i>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(categories) }}
+    </div>
 {% endblock %}
