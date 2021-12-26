@@ -1,0 +1,19 @@
+{% extends 'main/base.html.twig' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block body %}
+    <div id="root"></div>
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center">
+            <h1 class="display-4 text-center">
+                {{ title }}
+            </h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+{{ encore_entry_script_tags('app') }}
+{% endblock %}
