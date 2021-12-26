@@ -16,6 +16,7 @@
         "friendsofsymfony/elastica-bundle": "^6.0",
         "friendsofsymfony/rest-bundle": "^3.1",
         "gedmo/doctrine-extensions": "^3.4",
+        "jms/serializer-bundle": "^4.0",
         "knplabs/knp-menu-bundle": "^3.2",
         "knplabs/knp-paginator-bundle": "^5.8",
         "lexik/jwt-authentication-bundle": "^2.14",

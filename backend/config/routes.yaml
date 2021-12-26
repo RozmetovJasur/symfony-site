@@ -1,3 +1,8 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+api_login:
+  path: /api/login
+api_sign_up:
+  path: /api/sign-up

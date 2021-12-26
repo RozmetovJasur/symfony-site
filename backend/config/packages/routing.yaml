@@ -10,5 +10,3 @@ when@prod:
     framework:
         router:
             strict_requirements: null
-            api_login_check:
-                path: /api/login_check
