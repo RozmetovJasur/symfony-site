@@ -7,14 +7,16 @@ class SignUp extends Component {
         e.preventDefault();
 
         const data = {
-            firstName :this.firstName,
-            lastName :this.lastName,
-            email :this.email,
-            password :this.password,
-            confirmPassword :this.confirmPassword,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            plainPassword: {
+                "first": this.password,
+                "second": this.confirmPassword,
+            }
         }
 
-        axios.post('http://localhost',data).then(
+        axios.post('http://learn.loc/api/sign-up', data).then(
             response => {
                 console.log(response);
             }

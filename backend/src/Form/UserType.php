@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Unique;
 
 class UserType extends AbstractType
 {
@@ -19,7 +20,8 @@ class UserType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'constraints' => [
-                    new NotBlank()
+                    new NotBlank(),
+                    new Unique()
                 ]
             ])
             ->add('firstName', TextType::class, [
@@ -43,7 +45,9 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'constraints' => [
+            ]
         ]);
     }
 }
