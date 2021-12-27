@@ -25,6 +25,8 @@ class Login extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <h3>Login</h3>
+
                 <div className="form-group mb-3">
                     <label>Email</label>
                     <input type="email" className="form-control" placeholder="Email"
@@ -38,7 +40,7 @@ class Login extends Component {
                 </div>
 
                 <div className="d-grid gap-2">
-                    <button className="btn btn-primary btn-block">Sign up</button>
+                    <button className="btn btn-primary btn-block">Login</button>
                 </div>
             </form>
         );

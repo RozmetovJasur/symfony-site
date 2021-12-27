@@ -30,6 +30,7 @@ class SignUp extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <h3>Sign up</h3>
                 <div className="form-group mb-3">
                     <label>Ism</label>
                     <input type="text" className="form-control" placeholder="Ism"
