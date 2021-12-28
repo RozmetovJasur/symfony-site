@@ -12,7 +12,6 @@ namespace App\Controller\Api;
 use App\Entity\User;
 use App\Form\UserType;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

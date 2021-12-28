@@ -7,24 +7,45 @@ import Nav from "./components/Nav";
 import {BrowserRouter, Route, Router, Switch} from "react-router-dom";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
+import {Component} from "react";
+import axios from "axios";
 
-function App() {
-    return (
-        <BrowserRouter>
-            <div className="App">
-                <Nav/>
-                <div className="auth-wrapper">
-                    <div className="auth-inner">
-                        <Switch>
-                            <Route exact path="/" component={Home}/>
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/sign-up" component={SignUp}/>
-                        </Switch>
+export default class App extends Component {
+
+    state = {};
+
+    componentDidMount = () => {
+        axios.get('api/user').then(
+            response => {
+                this.setUser(response.data);
+            }
+        ).catch(err => {
+            console.log(err);
+        });
+    };
+
+    setUser = user => {
+        this.setState({
+            user: user
+        });
+    };
+
+    render() {
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Nav user={this.state.user} setUser={this.setUser}/>
+                    <div className="auth-wrapper">
+                        <div className="auth-inner">
+                            <Switch>
+                                <Route exact path="/" component={() => <Home user={this.state.user}/>}/>
+                                <Route exact path="/login" component={() => <Login setUser={this.setUser}/>}/>
+                                <Route exact path="/sign-up" component={SignUp}/>
+                            </Switch>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </BrowserRouter>
-    );
+            </BrowserRouter>
+        );
+    }
 }
-
-export default App;

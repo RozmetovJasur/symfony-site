@@ -16,7 +16,7 @@ class SignUp extends Component {
             }
         }
 
-        axios.post('http://learn.loc/api/sign-up', data).then(
+        axios.post('api/sign-up', data).then(
             response => {
                 console.log(response);
             }

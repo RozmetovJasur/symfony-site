@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import Redirect from "react-router-dom/es/Redirect";
 
 class Login extends Component {
+
+    state = {};
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -11,18 +14,28 @@ class Login extends Component {
             password: this.password
         }
 
-        axios.post('http://learn.loc/api/login', data).then(
+        axios.post('/api/login', data).then(
             response => {
-                console.log(response);
+                localStorage.setItem('token', response.data.token);
+                this.setState({
+                    loggedIn: true
+                });
+
+                this.props.setUser(response.data.user);
             }
         ).catch(
             err => {
                 console.log(err);
             }
-        )
+        );
     }
 
     render() {
+
+        if (this.state.loggedIn) {
+            return <Redirect to={'/'}/>;
+        }
+
         return (
             <form onSubmit={this.handleSubmit}>
                 <h3>Login</h3>
