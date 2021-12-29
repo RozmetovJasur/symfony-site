@@ -69,13 +69,11 @@ class ResetPasswordController extends BaseApiController
 
                 $mailer->send($email);
 
-                $response = clone $resetToken;
-
                 // Store the token object in session for retrieval in check-email route.
                 $this->setTokenObjectInSession($resetToken);
                 $entityManager->commit();
 
-                return $this->response($response, Response::HTTP_OK);
+                return $this->response(sprintf("Pochtangizni tekshiring %s", $user->getEmail()), Response::HTTP_OK);
 
             } catch (\Exception $e) {
                 $entityManager->rollback();

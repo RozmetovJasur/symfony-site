@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {fetchUser} from "../../api/user";
 
 class Login extends Component {
@@ -25,7 +25,9 @@ class Login extends Component {
             }
         ).catch(
             err => {
-                console.log(err);
+                this.setState({
+                    message: err.response.data.message
+                });
             }
         );
     }
@@ -36,8 +38,19 @@ class Login extends Component {
             return <Redirect to={'/'}/>;
         }
 
+        let error = '';
+        if (this.state.message) {
+            error = (
+                <div className="alert alert-danger" role="alert">
+                    {this.state.message}
+                </div>
+            )
+        }
+
         return (
             <form onSubmit={this.handleSubmit}>
+                {error}
+
                 <h3>Login</h3>
 
                 <div className="form-group mb-3">
@@ -54,6 +67,9 @@ class Login extends Component {
 
                 <div className="d-grid gap-2">
                     <button className="btn btn-primary btn-block">Login</button>
+                    <p className="forgot-password text-right">
+                        <Link to={"/forgot"}>Parolni unitdingizmi?</Link>
+                    </p>
                 </div>
             </form>
         );

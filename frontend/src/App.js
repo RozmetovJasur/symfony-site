@@ -9,19 +9,23 @@ import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
 import {Component} from "react";
 import axios from "axios";
+import Forgot from "./components/auth/Forgot";
+import ResetPassword from "./components/auth/ResetPassword";
 
 export default class App extends Component {
 
     state = {};
 
     componentDidMount = () => {
-        axios.get('api/user').then(
-            response => {
-                this.setUser(response.data);
-            }
-        ).catch(err => {
-            console.log(err);
-        });
+        if (localStorage.getItem('token')) {
+            axios.get('api/user').then(
+                response => {
+                    this.setUser(response.data);
+                }
+            ).catch(err => {
+                console.log(err);
+            });
+        }
     };
 
     setUser = user => {
@@ -41,6 +45,8 @@ export default class App extends Component {
                                 <Route exact path="/" component={() => <Home user={this.state.user}/>}/>
                                 <Route exact path="/login" component={() => <Login setUser={this.setUser}/>}/>
                                 <Route exact path="/sign-up" component={SignUp}/>
+                                <Route exact path="/forgot" component={Forgot}/>
+                                <Route exact path="/reset-password/:id" component={ResetPassword}/>
                             </Switch>
                         </div>
                     </div>
