@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\TimeStampableEntity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -36,9 +37,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Serializer\Exclude()
      */
     private $password;
 
+    /**
+     * @var string
+     * @Serializer\Exclude
+     */
     private $plainPassword;
 
     /**

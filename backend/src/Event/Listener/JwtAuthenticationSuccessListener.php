@@ -30,13 +30,6 @@ class JwtAuthenticationSuccessListener
         }
 
         $data['expires_at'] = (new \DateTime(sprintf('+ %s seconds', $this->jwtTll)))->format('Y-m-d H:i:s');
-
-        $u = new \stdClass();
-        $u->email = $user->getUsername();
-        $u->firstName = $user->getFirstName();
-        $u->lastName = $user->getLastName();
-
-        $data['user'] = $u;
         $event->setData($data);
     }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import Redirect from "react-router-dom/es/Redirect";
+import {Redirect} from "react-router-dom";
+import {fetchUser} from "../../api/user";
 
 class Login extends Component {
 
@@ -20,8 +21,7 @@ class Login extends Component {
                 this.setState({
                     loggedIn: true
                 });
-
-                this.props.setUser(response.data.user);
+                fetchUser().then(user => this.props.setUser(user))
             }
         ).catch(
             err => {
