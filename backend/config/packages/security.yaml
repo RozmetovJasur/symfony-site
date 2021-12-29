@@ -19,6 +19,8 @@ security:
             security: false
         sign-up:
             pattern: ^/api/sign-up
+        reset-password:
+            pattern: ^/api/reset-password
         login:
             pattern:  ^/api/login
             stateless: true
@@ -54,6 +56,7 @@ security:
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/sign-up, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/reset-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin, roles: IS_AUTHENTICATED_FULLY }
 #        - { path: ^/*, roles: IS_AUTHENTICATED_FULLY }
