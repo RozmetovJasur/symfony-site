@@ -1,0 +1,26 @@
+{
+  "menu": [
+    {
+      "key": "001",
+      "name": "Dashboard",
+      "route": "/"
+    },
+    {
+      "key": "002",
+      "name": "Services",
+      "route": "/services"
+    },
+    {
+      "key": "003",
+      "name": "About",
+      "route": "/about",
+      "children": [
+        {
+          "key": "004",
+          "name": "Children",
+          "route": "/child"
+        }
+      ]
+    }
+  ]
+}
