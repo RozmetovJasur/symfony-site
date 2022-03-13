@@ -12,10 +12,13 @@ namespace App\Controller\Api;
 use App\Form\FormErrorSerializer;
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\View\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Rest\Route("/api")
+ */
 class BaseApiController extends AbstractFOSRestController
 {
     protected function response($data, int $statusCode = Response::HTTP_OK, array $groups = []): Response

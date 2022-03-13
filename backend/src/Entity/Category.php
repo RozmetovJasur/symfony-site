@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     use TimeStampableEntity;
+
     public const STATUS_ACTIVE = 0;
     public const STATUS_IN_ACTIVE = 1;
 
@@ -30,12 +31,12 @@ class Category
     /**
      * @ORM\OneToOne(targetEntity=Category::class, cascade={"persist", "remove"})
      */
-    private self $parent;
+    private ?self $parent = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $image;
+    private ?string $image = null;
 
     /**
      * @ORM\Column(type="smallint", nullable=true,options={"default":0})
