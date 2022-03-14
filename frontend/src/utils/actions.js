@@ -12,6 +12,7 @@ import Cart from "./../pages/Cart";
 import Products from "./../pages/Products";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
+import ProductDetail from "../pages/ProductDetail";
 
 export const privateRoutes = [
     {
@@ -37,4 +38,12 @@ export const publicRoutes = [
         path: ROUTE_PRODUCT,
         Component: Products
     },
+    {
+        path: ROUTE_PRODUCT + '/:id',
+        Component: ProductDetail
+    },
+    {
+        path: ROUTE_CART,
+        Component: Cart
+    }
 ];

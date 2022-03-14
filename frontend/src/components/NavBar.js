@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {Context} from "../index";
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
-import {ROUTE_AUTH_LOGIN, ROUTE_AUTH_SIGN_UP, ROUTE_HOME, ROUTE_PRODUCT} from "../utils/consts";
+import {ROUTE_AUTH_LOGIN, ROUTE_AUTH_SIGN_UP, ROUTE_CART, ROUTE_HOME, ROUTE_PRODUCT} from "../utils/consts";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 
@@ -31,6 +31,8 @@ const NavBar = observer(() => {
                                 onClick={() => history.push(ROUTE_AUTH_SIGN_UP)}>Sign up</Button>
                     </Nav>
                 }
+                <Nav.Link onClick={() => history.push(ROUTE_CART)} className="text-white">Cart</Nav.Link>
+
             </Container>
         </Navbar>
     );

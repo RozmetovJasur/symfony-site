@@ -10,6 +10,7 @@
 namespace App\Controller\Api;
 
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,5 +32,13 @@ class ProductController extends BaseApiController
                 $request->query->getInt('page', 1),
                 $request->query->getInt('size', 25)
             ), Response::HTTP_OK);
+    }
+
+    /**
+     * @Rest\Get("/products/{product}", name="api_products_one")
+     */
+    public function one(Request $request, Product $product)
+    {
+        return $this->response($product, Response::HTTP_OK);
     }
 }

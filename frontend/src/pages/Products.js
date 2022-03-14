@@ -1,5 +1,4 @@
-import React, {Component, useContext, useEffect} from 'react';
-import {Col, Container, Row} from "react-bootstrap";
+import React, {useContext, useEffect} from 'react';
 import ProductList from "../components/product/ProductList";
 import {fetchProducts} from "../api/product";
 import {Context} from "../index";
@@ -10,7 +9,10 @@ const Products = () => {
     useEffect(() => {
         fetchProducts().then(data => {
             product.setProducts(data.items)
-        })
+        });
+        return () => {
+            product.setProducts([]);
+        }
     }, [])
 
     return (
