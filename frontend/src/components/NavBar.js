@@ -6,7 +6,7 @@ import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 
 const NavBar = observer(() => {
-    const {user} = useContext(Context);
+    const {user, cart} = useContext(Context);
     const history = useHistory()
 
     const logout = () => {
@@ -31,7 +31,8 @@ const NavBar = observer(() => {
                                 onClick={() => history.push(ROUTE_AUTH_SIGN_UP)}>Sign up</Button>
                     </Nav>
                 }
-                <Nav.Link onClick={() => history.push(ROUTE_CART)} className="text-white">Cart</Nav.Link>
+                <Nav.Link onClick={() => history.push(ROUTE_CART)}
+                          className="text-white">Cart {cart.items ? cart.items.length : ""}</Nav.Link>
 
             </Container>
         </Navbar>

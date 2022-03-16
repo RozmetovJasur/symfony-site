@@ -1,10 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import {useParams} from 'react-router-dom'
 import {fetchOneProduct} from "../api/product";
 import {BASE_DEV_APP_API_URL} from "../utils/consts";
+import {Context} from "../index";
 
 const ProductDetail = () => {
+
+    const {cart} = useContext(Context);
+
     const [product, setProduct] = useState({})
     const {id} = useParams()
     useEffect(() => {
@@ -29,7 +33,7 @@ const ProductDetail = () => {
                         style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
                     >
                         <h3>Price: {product.price} $.</h3>
-                        <Button variant={"outline-dark"}>Add to cart</Button>
+                        <Button variant={"outline-dark"} onClick={() => cart.add(product)}>Add to cart</Button>
                     </Card>
                 </Col>
             </Row>

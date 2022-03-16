@@ -5,13 +5,13 @@ import ProductItem from "./ProductItem";
 import {observer} from "mobx-react-lite";
 
 const ProductList = observer(() => {
-    const {product} = useContext(Context);
+    const {product,cart} = useContext(Context);
 
     return (
         <Row className="text-center">
             {
                 product.products.map(product =>
-                    <ProductItem key={product.id} product={product}/>
+                    <ProductItem key={product.id} product={product} cart={cart}/>
                 )
             }
         </Row>
