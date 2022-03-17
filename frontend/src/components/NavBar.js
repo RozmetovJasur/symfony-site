@@ -32,7 +32,8 @@ const NavBar = observer(() => {
                     </Nav>
                 }
                 <Nav.Link onClick={() => history.push(ROUTE_CART)}
-                          className="text-white">Cart {cart.items ? cart.items.length : ""}</Nav.Link>
+                          className="text-white">Cart <span
+                    className="badge bg-danger ">{cart.items ? cart.items.length : ""}</span></Nav.Link>
 
             </Container>
         </Navbar>

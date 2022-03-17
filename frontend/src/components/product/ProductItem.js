@@ -9,9 +9,10 @@ const ProductItem = ({product}) => {
     const history = useHistory();
 
     return (
-        <div className="col-2 mt-3" onClick={() => history.push(ROUTE_PRODUCT + '/' + product.id)}>
+        <div className="col-2 mt-3">
             <Card style={{width: '18rem'}}>
-                <Card.Img variant="top" src={BASE_DEV_APP_API_URL + '/' + product.image}/>
+                <Card.Img onClick={() => history.push(ROUTE_PRODUCT + '/' + product.id)} variant="top"
+                          src={BASE_DEV_APP_API_URL + '/' + product.image}/>
                 <Card.Body>
                     <Card.Title>{product.title}</Card.Title>
                     <Card.Text>

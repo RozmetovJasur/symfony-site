@@ -3,7 +3,7 @@ import {makeAutoObservable} from "mobx";
 export default class CartStore {
     constructor() {
         if (localStorage.getItem('cart') != null)
-            this._items = localStorage.getItem('cart');
+            this._items = JSON.parse(localStorage.getItem('cart'));
         else
             this._items = [];
         makeAutoObservable(this);
@@ -14,15 +14,16 @@ export default class CartStore {
     }
 
     add(product) {
-        const exist = this._items.find((x) => x.id === product.id);
+        let items = this._items;
+        const exist = items.find((x) => x.id === product.id);
         if (exist) {
-            this._items.map((item) =>
-                item.id === product.id ? {...exist, qty: exist.qty + 1} : item
-            )
+            items = items.map(value => (value.id === product.id ? {...value, qty: exist.qty + 1} : value))
         } else {
-            this._items = [...this._items, {...product, qty: 1}]
+            items.push({id: product.id, qty: 1});
         }
-        localStorage.setItem('cart', this._items);
+
+        this.setItems(items)
+        localStorage.setItem('cart', JSON.stringify(items));
     };
 
     get items() {

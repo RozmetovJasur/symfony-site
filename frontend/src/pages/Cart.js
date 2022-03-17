@@ -1,13 +1,18 @@
-import React, {Component} from 'react';
+import React, {Component, useContext} from 'react';
+import {Context} from "../index";
 
-class Cart extends Component {
-    render() {
-        return (
-            <div>
-                Cart
-            </div>
-        );
-    }
+const Cart = () => {
+    const {cart} = useContext(Context);
+
+    return (
+        <div>{
+            cart.items.map(function (value, idx) {
+                return (<div>{value.id} {value.qty} </div>)
+            })
+
+        }
+        </div>
+    );
 }
 
 export default Cart;
