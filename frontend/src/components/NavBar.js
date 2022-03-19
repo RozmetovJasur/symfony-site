@@ -1,7 +1,14 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {Context} from "../index";
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
-import {ROUTE_AUTH_LOGIN, ROUTE_AUTH_SIGN_UP, ROUTE_CART, ROUTE_HOME, ROUTE_PRODUCT} from "../utils/consts";
+import {
+    ROUTE_AUTH_LOGIN,
+    ROUTE_AUTH_SIGN_UP,
+    ROUTE_CART,
+    ROUTE_HOME,
+    ROUTE_PRODUCT,
+    ROUTE_WISHLIST
+} from "../utils/consts";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 
@@ -33,7 +40,10 @@ const NavBar = observer(() => {
                 }
                 <Nav.Link onClick={() => history.push(ROUTE_CART)}
                           className="text-white">Cart <span
-                    className="badge bg-danger ">{cart.items ? cart.items.length : ""}</span></Nav.Link>
+                    className="badge rounded-pill badge-notification bg-danger">{cart.items ? cart.items.length : ""}</span></Nav.Link>
+                <Nav.Link onClick={() => history.push(ROUTE_WISHLIST)}
+                          className="text-white">Wishlist <span
+                    className="badge rounded-pill badge-notification bg-danger">{cart.items ? cart.items.length : ""}</span></Nav.Link>
 
             </Container>
         </Navbar>

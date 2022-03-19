@@ -32,4 +32,16 @@ class ProductRepository extends ServiceEntityRepository
         }
         return $qb;
     }
+
+    public function findById(array $ids): \Doctrine\ORM\QueryBuilder
+    {
+        $query = $this->createQueryBuilder('s')
+            ->orderBy('s.id', 'DESC');
+
+        $query->where('s.id in (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $query;
+    }
+
 }

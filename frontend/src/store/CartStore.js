@@ -29,4 +29,9 @@ export default class CartStore {
     get items() {
         return this._items;
     }
+
+
+    get itemIds() {
+
+    }
 }

@@ -4,7 +4,7 @@ import {
     ROUTE_AUTH_SIGN_UP,
     ROUTE_CART,
     ROUTE_HOME,
-    ROUTE_PRODUCT
+    ROUTE_PRODUCT, ROUTE_WISHLIST
 } from "./consts";
 
 import Home from "./../pages/Home";
@@ -13,6 +13,7 @@ import Products from "./../pages/Products";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
 import ProductDetail from "../pages/ProductDetail";
+import Wishlist from "../pages/Wishlist";
 
 export const privateRoutes = [
     {
@@ -45,5 +46,9 @@ export const publicRoutes = [
     {
         path: ROUTE_CART,
         Component: Cart
+    },
+    {
+        path: ROUTE_WISHLIST,
+        Component: Wishlist
     }
 ];

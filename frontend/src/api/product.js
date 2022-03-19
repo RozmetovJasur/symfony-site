@@ -9,3 +9,8 @@ export const fetchOneProduct = async (id) => {
     const {data} = await $host.get('api/products/' + id)
     return data
 }
+
+export const fetchProductsById = async (id) => {
+    const {data} = await $host.get('api/products-by-id/' + id)
+    return data
+}
