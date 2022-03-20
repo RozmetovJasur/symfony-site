@@ -14,7 +14,9 @@ use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -55,7 +57,11 @@ class ProductController extends BaseApiController
             ->createNamed('', FormType::class, null, [
                 'method' => 'GET',
             ])
-            ->add('id', ChoiceType::class)
+            ->add('id', CollectionType::class, [
+                'entry_type' => IntegerType::class,
+                'allow_add' => true,
+                'prototype' => true,
+            ])
             ->handleRequest($request);
 
         $data = $filter->getData() ?: [];

@@ -5,6 +5,8 @@ import App from './App';
 import UserStore from "./store/UserStore";
 import ProductStore from "./store/ProductStore";
 import CartStore from "./store/CartStore";
+import "antd/dist/antd.css";
+
 export const Context = createContext(null);
 
 ReactDOM.render(

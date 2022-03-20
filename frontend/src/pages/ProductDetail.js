@@ -33,7 +33,7 @@ const ProductDetail = () => {
                         style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
                     >
                         <h3>Price: {product.price} $.</h3>
-                        <Button variant={"outline-dark"} onClick={() => cart.add(product)}>Add to cart</Button>
+                        <Button variant={"outline-dark"} onClick={() => cart.plusCount(product)}>Add to cart</Button>
                     </Card>
                 </Col>
             </Row>

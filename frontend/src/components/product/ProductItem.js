@@ -21,7 +21,7 @@ const ProductItem = ({product}) => {
                 </Card.Body>
                 <Card.Footer>
                     <Button variant="success" style={{marginRight: 3}}>Buy one click</Button>
-                    <Button variant="primary" onClick={() => cart.add(product)}>Buy</Button>
+                    <Button variant="primary" onClick={() => cart.plusCount(product)}>Buy</Button>
                 </Card.Footer>
             </Card>
         </div>
