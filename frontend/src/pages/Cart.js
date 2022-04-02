@@ -3,13 +3,13 @@ import {Context} from "../index";
 import "../assets/css/cart.css"
 import {BASE_DEV_APP_API_URL} from "../utils/consts";
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import {Spinner} from "react-bootstrap";
+import {Row, Spinner} from "react-bootstrap";
 import {fetchProductsById} from "../api/product";
 import {observer} from "mobx-react-lite";
 import {confirmAlert} from "react-confirm-alert";
 
 const Cart = observer(() => {
-    const {cart} = useContext(Context);
+    const {cart,wishlist} = useContext(Context);
 
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
@@ -68,8 +68,9 @@ const Cart = observer(() => {
                                     })
                                     if (cartItem == null)
                                         return false;
+
                                     return (
-                                        <div className="row">
+                                        <Row>
                                             <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                                 <div className="bg-image hover-overlay hover-zoom ripple rounded"
                                                      data-mdb-ripple-color="light">
@@ -91,6 +92,7 @@ const Cart = observer(() => {
                                                 </button>
                                                 <button type="button" className="btn btn-danger btn-sm mb-2"
                                                         data-mdb-toggle="tooltip"
+                                                        onClick={() => wishlist.add(item)}
                                                         title="Move to the wish list">
                                                     <span className="fa fa-heart"></span>
                                                 </button>
@@ -107,7 +109,7 @@ const Cart = observer(() => {
                                                     </button>
 
                                                     <div className="form-outline" style={{width: 50}}>
-                                                        <input id="form1" min="0" name="quantity" value={cartItem.qty}
+                                                        <input id="form1"  name="quantity" value={cartItem.qty}
                                                                type="number"
                                                                className="form-control"/>
                                                         <label className="form-label" htmlFor="form1">Quantity</label>
@@ -123,7 +125,7 @@ const Cart = observer(() => {
                                                     <strong>$ {item.price}</strong>
                                                 </p>
                                             </div>
-                                        </div>
+                                        </Row>
                                     )
                                 })}
                                 <hr className="my-4"/>

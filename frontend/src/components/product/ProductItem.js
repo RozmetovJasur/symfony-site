@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import {Context} from "../../index";
 
 const ProductItem = ({product}) => {
-    const {cart} = useContext(Context);
+    const {cart,wishlist} = useContext(Context);
     const history = useHistory();
 
     return (
@@ -22,6 +22,9 @@ const ProductItem = ({product}) => {
                 <Card.Footer>
                     <Button variant="success" style={{marginRight: 3}}>Buy one click</Button>
                     <Button variant="primary" onClick={() => cart.plusCount(product)}>Buy</Button>
+                    <Button variant="danger" style={{marginLeft: 3}} onClick={() => wishlist.add(product)}>
+                        <i className="fa fa-heart"></i>
+                    </Button>
                 </Card.Footer>
             </Card>
         </div>

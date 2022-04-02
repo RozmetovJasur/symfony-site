@@ -14,13 +14,16 @@ export default class WishlistStore {
         this._items = items;
     }
 
-    plusCount(product) {
+    add(product) {
         let items = this._items;
         const exist = items.find((x) => x.id === product.id);
+        let message = "";
         if (exist) {
-            items = items.map(value => (value.id === product.id ? {...value, qty: exist.qty + 1} : value))
+            items = items.filter(item => item.id !== product.id)
+            message = "Successfully remove to the wishlist";
         } else {
-            items.push({id: product.id, qty: 1});
+            items.push({id: product.id});
+            message = "Successfully added to the wishlist";
         }
 
         this.setItems(items)
@@ -28,35 +31,13 @@ export default class WishlistStore {
 
         notification.open({
             type: 'success',
-            message: 'Successfully added to the wishlist',
-            description:
-                'Successfully added to the wishlist',
+            message: message,
+            description: message,
             onClick: () => {
                 console.log('Notification Clicked!');
             },
         });
 
-    };
-
-    minusCount(product) {
-        let items = this._items;
-        const exist = items.find((x) => x.id === product.id);
-        if (exist) {
-            items = items.map(value => (value.id === product.id ? {...value, qty: exist.qty - 1} : value))
-            items = items.filter(item => item.qty > 0)
-        }
-        this.setItems(items)
-        localStorage.setItem('wishlist', JSON.stringify(items));
-
-        notification.open({
-            type: 'success',
-            message: 'Successfully minus count the wishlist',
-            description:
-                'Successfully minus count the wishlist',
-            onClick: () => {
-                console.log('Notification Clicked!');
-            },
-        });
     };
 
     remove(product) {
@@ -76,26 +57,5 @@ export default class WishlistStore {
             ids = ids + 'id[]=' + value.id + '&';
         });
         return ids;
-    }
-
-    get totalCount() {
-        let count = 0;
-        this._items.map(value => {
-            count += value.qty;
-        })
-        return count;
-    }
-
-    totalPrice(products) {
-        let price = 0;
-        this._items.map(value => {
-            let product = products.find(v => {
-                if (v.id === value.id)
-                    return v;
-            })
-
-            price += product.price * value.qty;
-        })
-        return price;
     }
 }

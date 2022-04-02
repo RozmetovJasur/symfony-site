@@ -13,7 +13,7 @@ import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 
 const NavBar = observer(() => {
-    const {user, cart} = useContext(Context);
+    const {user, cart,wishlist} = useContext(Context);
     const history = useHistory()
 
     const logout = () => {
@@ -43,7 +43,7 @@ const NavBar = observer(() => {
                     className="badge rounded-pill badge-notification bg-danger">{cart.items ? cart.items.length : ""}</span></Nav.Link>
                 <Nav.Link onClick={() => history.push(ROUTE_WISHLIST)}
                           className="text-white">Wishlist <span
-                    className="badge rounded-pill badge-notification bg-danger">{cart.items ? cart.items.length : ""}</span></Nav.Link>
+                    className="badge rounded-pill badge-notification bg-danger">{wishlist.items ? wishlist.items.length : ""}</span></Nav.Link>
 
             </Container>
         </Navbar>
